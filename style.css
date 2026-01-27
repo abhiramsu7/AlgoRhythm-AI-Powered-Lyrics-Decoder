@@ -1,0 +1,61 @@
+/* style.css */
+
+/* 1. Global Reset & Dark Theme */
+.stApp {
+    background-color: #0E1117;
+    color: #FAFAFA;
+}
+
+/* 2. Typography (The "Code" Look) */
+h1, h2, h3 {
+    font-family: 'Courier New', monospace;
+    color: #FF4B4B; 
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* 3. The Lyrics Box (Terminal Style) */
+.lyrics-box {
+    background-color: #1E1E1E;
+    padding: 20px;
+    border-radius: 10px;
+    border-left: 5px solid #FF4B4B;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: #00FF00; /* Hacker Green */
+    white-space: pre-wrap;
+    max-height: 400px;
+    overflow-y: auto;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+}
+
+/* 4. The Analysis Box (Clean Card) */
+.analysis-box {
+    background-color: #262730;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+    border: 1px solid #444;
+}
+
+/* 5. Custom Buttons */
+div.stButton > button {
+    background-color: #FF4B4B;
+    color: white;
+    border: none;
+    padding: 10px 24px;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 1px;
+    width: 100%;
+    transition: all 0.3s ease;
+}
+div.stButton > button:hover {
+    background-color: #FF0000;
+    box-shadow: 0 0 10px #FF0000;
+}
+
+/* 6. Hiding Streamlit Branding */
+#MainMenu {visibility: hidden;}
+footer {visibility: hidden;}
+header {visibility: hidden;}
