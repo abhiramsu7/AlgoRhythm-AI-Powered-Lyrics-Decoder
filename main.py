@@ -42,33 +42,47 @@ def get_lyrics(song,artist):
     except Exception as e:
         return None , f"Connection Error: {e}"
     
-def get_ai_analysis(lyrics , song_name , artist , language):
+def get_ai_analysis(lyrics, song_name, artist, language):
     """
-    Sends lyrics to Gemini for decoding.
-    We do NOT cache this because users might want to switch languages.
+    Sends lyrics to Gemini for a Deep Cultural & Hype Analysis.
     """
     prompt = f"""
-    Act as an expert music linguist and cultural translator.
+    You are the ultimate music linguist, historian, and pop-culture insider.
     
     Context:
-    - Song: {song_name} by {artist}
+    - Song: {song_name}
+    - Artist: {artist}
     - User's Target Language: {language}
     
     Lyrics (Snippet):
     {lyrics[:3000]} 
     
-    Task:
-    1. VIBE CHECK: A 2-sentence summary of the song's meaning and mood in English.
-    2. TRANSLATION: Translate the Chorus/Hook and the key lines into conversational {language}.
-    3. SLANG DECODER: Identify all the specific slang words, metaphors, or cultural references used. Explain what they mean in this genre's context.
+    Task: Provide a deep, magazine-style analysis of this track. Use clear, engaging language. Format the output exactly with these bold headings:
     
-    Format the output cleanly with bold headings.
+    ### 🧠 The Mentality & Meaning
+    - Explain the exact reason these lyrics were written. 
+    - What was the artist's headspace, mentality, or emotional state while making this?
+    - Translate the core message and the Hook/Chorus into conversational {language}.
+    
+    ### 📜 History & Context
+    - What is the backstory of this song? 
+    - Who are they dissing, loving, or referencing? Explain the historical or personal context behind the track.
+    
+    ### 📖 Slang & Decoder
+    - Break down 3-5 specific slang words, double-entendres, or cultural references used in the lyrics.
+    - Explain what they actually mean in the context of this specific genre.
+    
+    ### 🔥 The Hype (Current Trends)
+    - Act like a Reddit/Twitter music insider. What is the current internet consensus and hype around {artist} right now?
+    - Mention recent viral moments, new album drops (e.g., if it's Kanye, mention 'Bully' or recent news), controversies, or why the internet is talking about them *right now*. Keep the energy high!
     """
-
+    
     try:
+        # Note: Gemini 1.5/2.0 Flash is very up-to-date on internet culture,
+        # so asking it for "The Hype" will actually pull recent facts!
         response = client.models.generate_content(
-            model='gemini-flash-latest',
-            contents = prompt
+            model='gemini-flash-latest', 
+            contents=prompt
         )
         return response.text
     except Exception as e:
